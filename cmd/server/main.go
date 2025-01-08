@@ -30,6 +30,7 @@ func main() {
     // Initialize services and handlers
     authService := auth.NewAuthService(db)
     authHandler := handlers.NewAuthHandler(authService)
+    invoiceHandler := handlers.NewInvoiceHandler()
 
     // Initialize router
     r := mux.NewRouter()
@@ -40,6 +41,8 @@ func main() {
     r.HandleFunc("/auth/register", authHandler.ShowRegister).Methods("GET")
     r.HandleFunc("/auth/register", authHandler.Register).Methods("POST")
     r.HandleFunc("/auth/logout", authHandler.Logout).Methods("POST")
+    r.HandleFunc("/invoice", invoiceHandler.ShowInvoice).Methods("GET")
+    r.HandleFunc("/invoice/generate", invoiceHandler.GenerateInvoice).Methods("POST")
 
     // Serve static files
     r.PathPrefix("/static/").Handler(http.StripPrefix("/static/", http.FileServer(http.Dir("static"))))

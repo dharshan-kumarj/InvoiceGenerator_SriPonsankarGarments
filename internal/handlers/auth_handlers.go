@@ -52,7 +52,7 @@ func (h *AuthHandler) Login(w http.ResponseWriter, r *http.Request) {
     session.Values["userID"] = user.ID
     session.Save(r, w)
 
-    http.Redirect(w, r, "/dashboard", http.StatusSeeOther)
+    http.Redirect(w, r, "/invoice", http.StatusSeeOther)
 }
 
 func (h *AuthHandler) Register(w http.ResponseWriter, r *http.Request) {
